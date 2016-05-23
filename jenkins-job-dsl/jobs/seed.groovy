@@ -31,6 +31,6 @@ job("_seed-microdc") {
         }
     }
     publishers {
-        archiveJunit 'build/test-results/**/*.xml'
+        archiveJunit 'jenkins-job-dsl/build/test-results/**/*.xml'
     }
 }
