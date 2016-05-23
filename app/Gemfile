@@ -1,0 +1,15 @@
+#ruby-gemset=brownbag
+source 'https://rubygems.org'
+
+ruby '2.2.3'
+
+gem 'rest-client'
+
+group :development do
+  gem 'pry'
+end
+
+group :test do
+  gem 'cucumber'
+  gem 'aruba'
+end

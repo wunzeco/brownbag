@@ -1,4 +1,8 @@
-dl = DataLoader.new('192.168.99.100', '8080')
+dl_host = ENV['DL_HOST'] || '192.168.99.100'
+dl_port = ENV['DL_PORT'] || 9090
+
+dl = DataLoader.new(dl_host, dl_port)
+
 
 Given(/^I can connect to data_loader app$/) do
   dl.index()
