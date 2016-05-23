@@ -1,0 +1,36 @@
+---
+- hosts: jenkins
+  become: yes
+
+  vars_files:
+    - jenkins_vars.yml
+
+  pre_tasks:
+    - name: Install python-pip
+      apt: name=python-pip update_cache=yes state=present
+
+    - name: Install awscli
+      pip: name=awscli state=present
+
+    - name: Install virtualenv
+      pip: name=virtualenv state=present
+
+    - name: Install rvm dependencies recommended for jenkins integration
+      apt: name={{ item }} state=present
+      with_items: "{{ rvm1_dependencies }}"
+
+    - name: Install libgmp3-dev library require for ffi gem to install successfully
+      apt: name=libgmp3-dev state=present
+
+  roles:
+    - wunzeco.java
+    - wunzeco.jenkins
+    - rvm_io.rvm1-ruby
+    - wunzeco.jenkins-extra
+    - wunzeco.ssh-config
+
+  post_tasks:
+    - name: Creat python virtual environment
+      shell: virtualenv "{{ jenkins_home }}/development"
+      become_user: jenkins
+

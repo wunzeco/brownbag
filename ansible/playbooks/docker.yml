@@ -1,0 +1,13 @@
+---
+- name: Docker Instance
+  hosts: docker
+  become: yes
+
+  vars:
+
+  pre_tasks:
+    - name: update apt repo
+      apt: update_cache=yes
+
+  roles:
+    - role: wunzeco.docker

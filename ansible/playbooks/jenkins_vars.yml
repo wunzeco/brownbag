@@ -1,0 +1,122 @@
+
+java_package: openjdk-8-jdk
+jenkins_version: 1.651.2
+jenkins_home: /var/lib/jenkins
+jenkins_pip_pkgs_extra: [ ansible ]
+jenkins_plugins:
+  - 'ansicolor:0.4.2'
+  - 'ant:1.2'
+  - 'antisamy-markup-formatter:1.3'
+  - 'authentication-tokens:1.2'
+  - 'backup:1.6.1'
+  - 'build-monitor-plugin:1.8+build.201601112328'
+  - 'build-name-setter:1.6.3'
+  - 'build-pipeline-plugin:1.5.2'
+  - 'buildgraph-view:1.1.1'
+  - 'claim:2.8'
+  - 'copyartifact:1.38'
+  - 'credentials-binding:1.7'
+  - 'credentials:1.27'
+  - 'cvs:2.12'
+  - 'dashboard-view:2.9.7'
+  - 'delivery-pipeline-plugin:0.9.9'
+  - 'envinject:1.92.1'
+  - 'external-monitor-job:1.4'
+  - 'gatling:1.1.2'
+  - 'ghprb:1.31.4'
+  - 'git-client:1.19.6'
+  - 'git:2.4.4'
+  - 'github-api:1.72.1'
+  - 'github-oauth:0.22.3'
+  - 'github:1.18.2'
+  - 'gradle:1.24'
+  - 'groovy:1.29'
+  - 'htmlpublisher:1.11'
+  - 'icon-shim:2.0.3'
+  - 'javadoc:1.3'
+  - 'jclouds-jenkins:2.8.1-1'
+  - 'job-dsl:1.45'
+  - 'jquery:1.11.2-0'
+  - 'junit:1.11'
+  - 'ldap:1.11'
+  - 'mailer:1.16'
+  - 'mapdb-api:1.0.6.0'
+  - 'matrix-auth:1.3.2'
+  - 'matrix-project:1.6'
+  - 'maven-plugin:2.12.1'
+  - 'multiple-scms:0.6'
+  - 'pam-auth:1.2'
+  - 'parameterized-trigger:2.30'
+  - 'plain-credentials:1.1'
+  - 'radiatorviewplugin:1.26'
+  - 'rebuild:1.25'
+  - 'ruby-runtime:0.12'
+  - 'rvm:0.4'
+  - 'scm-api:1.2'
+  - 'script-security:1.18.1'
+  - 'simple-theme-plugin:0.3'
+  - 'ssh-agent:1.10'
+  - 'ssh-credentials:1.11'
+  - 'ssh-slaves:1.10'
+  - 'structs:1.1'
+  - 'subversion:2.5.7'
+  - 'timestamper:1.7.4'
+  - 'token-macro:1.12.1'
+  - 'translation:1.12'
+  - 'violations:0.7.11'
+  - 'windows-slaves:1.1'
+  - 'workflow-step-api:2.0'
+  - 'xvfb:1.1.3'
+
+jenkins_extra_ssh_keys:
+  # priority-moments - required for O2IP/Priority-Moments repo
+  - keyname: priority-moments
+    public: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVT4Hth7soHd5teNxW4Y+vNUr4Tvfz19jt70DLstDjf965aqciIzi8EC+3qiiX2FClbfq/RA0RL5wbK1l27OxOr6tHExslapDe/TU58kQacyvU7m0E3JI+0oor0E+imt5LSh2WikP+yPbInnttSfX0f6zwN7ROh3V9bVoLyzz4WWENszRHceoJ9YfyF6+nZqEz1adG64Tc94Ys00g+hWm52A04IdOvs5QOYw7rnou91W73odzTmcoowHzP5HrBrQwK2hFKrrXCcg0TA/7eD5F8V7jQlhKKbCEawUrBlnTVEKcIjZjmNDky5yuFLHJ+npl2Itn/H2kpunzJ9K0xizJv
+    private: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEowIBAAKCAQEA1U+B7Ye7KB3ebXjcVuGPrzVK+E7389fY7e9Ay7LQ43/euWqn
+      IiM4vBAvt6ool9hQpW36v0QNES+cGytZduzsTq+rRxMbJWqQ3v01OfJEGnMr1O5t
+      BNySPtKKK9BPopreS0odlopD/sj2yJ57bUn19H+s8De0Tod1fW1aC8s8+FlhDbM0
+      R3HqCfWH8hevp2ahM9WnRuuE3PeGLNNIPoVpudgNOCHTr7OUDmMO656LvdVu96Hc
+      05nKKMB8z+R6wa0MCtoRSq61wnINEwP+3g+RfFe40JYSimwhGsFKwZZ01RCnCI2Y
+      5jQ5MucrhSxyfp6ZdiLZ/x9pKbp8yfStMYsybwIDAQABAoIBAGfQwlNwc84ae16c
+      K+C89sk3Dr268UJkEtf6UXbSGIgge62SErWynrIozpB86DS+usFIvXjJDfMHUNqI
+      Ropy1K+XH6z/x352VvuwEG+bUTnuQ67mO3jaQPMCVOzt/VQOO5I5CB10PZOLC1Co
+      kTmnfWT5nplrAv4VP0FEL0b+KzZSpkoUFc8QuLHGtXKPSHwH8YkmyxjsAIn94s+Q
+      3Jn70oFXSNPHGCO3cDH/n9TzL6kThOLIgyTmcGaTlmyZRQwT8TYNrPDKja7MlujY
+      BjvF25lx8wsn55JciCUw+8HUZ57q1bZpAEDqF9yOHaNr/dEVRV81J9TkOqorBb35
+      QAC3bsECgYEA6uSaPA5kLoc7W659vxTWcS6xrAB8LtUR3ExmDi6X8aXuaMbrvrGG
+      1dQjf+dvFB0bf2Hb7PmZTvLs7loJA3p1LNqI7F4PjkdIsKKGftWN/af90W8nnVGI
+      xZCuS+sCQjO/bh264tzTkPRTPhGsMUhiLCOz8J0vf8n9I6fIkU38LEMCgYEA6Hpu
+      Tcmp02BQ8OzRQ2AHDq/eaNFC5FVYbh5sOvA0gxSKVtqDnVl7n8f1UZiclcWOe6NH
+      JDPRLmBdX1RoMrmAcwuZOf8/C8vah/5V9Hov2EgTLI57eGoabbJS8I+w851hfoJu
+      G1exfV0oS9NZ+fa1eQlHfseccaM91JlJmNK9lGUCgYBJz8Avsw4EGPasHq7hBrlE
+      I7otJJHhXY8ZPOCtADM6+jtqrWeTKtIGC32EScN7/JGRe7zSQLTOPEP7uksuzqJX
+      j+yK6hvVR80txESjQpQ16z41O8qlAuQJwSckMBsrlntHLQx3EZFh8YTe8kq7ydUf
+      rbBzodE1RNHJDIZYMrtVZQKBgQCw6Ponl970S8dMj+pvKxQzyQGnIheVSp0Qr3YN
+      I93SIj9j+MVPaFj7Ll8wyMHf94aF76qjkgsND6f+c20XrLJi2eCwkdyYTXjvJEyk
+      zpa6L57nuUWcTKHv+FPFXJN7z7fxXbAMfp9ClzGjAiLmZSeUA8u0XpJep6rVrhCj
+      iztZQQKBgFp6PJGr9YMkHWdbWSSlKXvj+o5LxmVSu79tGV0UX33Ud1n8xjWcS5Jc
+      JzAJJTquExclZ+KO4wObtSi6upXAX5hLw9c9ayEBDyG75uiyKbVTmKpP6lmEJs7n
+      RGLYu5kE9pYkgRqEktRSzcZn+Tn3CpsDyq56JnO5JVu31OmPjoHF
+      -----END RSA PRIVATE KEY-----
+
+
+rvm1_install_flags: '--auto-dotfiles --user-install'
+rvm1_autolib_mode:  'disable'
+rvm1_install_path:  "{{ jenkins_home }}/.rvm"
+rvm1_rubies: [ ruby-2.2.3 ]
+rvm1_user: jenkins
+rvm1_dependencies: [ bison, zlib1g-dev, libssl-dev, libxml2-dev ]
+
+ssh_config_user: jenkins
+ssh_config_home_dir: /var/lib/jenkins
+ssh_config_default:
+  StrictHostKeyChecking: "no"
+  UserKnownHostsFile:    "/dev/null"
+ssh_configs:
+  - name:     "Vagrant - brownbag"
+    Host: "docker"
+    Hostname: "172.20.10.20"
+    User:     "vagrant"

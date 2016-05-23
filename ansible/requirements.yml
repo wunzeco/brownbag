@@ -1,0 +1,7 @@
+- src: wunzeco.docker
+- src: wunzeco.docker-registry-v2
+- src: wunzeco.jenkins
+- src: wunzeco.jenkins-extra
+- src: wunzeco.java
+- src: wunzeco.ssh-config
+- src: rvm_io.rvm1-ruby
