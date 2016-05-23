@@ -49,7 +49,6 @@ job("${svc}-service-build") {
         colorizeOutput()
     }
     publishers {
-        archiveJunit '**/*.tar.gz'
         archiveArtifacts {
             pattern("**/Dockerfile")
             pattern("**/*.tar.gz")
