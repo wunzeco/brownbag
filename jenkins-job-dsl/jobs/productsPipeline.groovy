@@ -14,6 +14,6 @@ deliveryPipelineView('Products-CI-pipeline') {
     showAvatars()
     showChangeLog()
     pipelines {
-        regex(/^(.*-service)$/)
+        regex(/^(.*-build)$/)
     }
 }
