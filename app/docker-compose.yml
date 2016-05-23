@@ -6,7 +6,7 @@ es:
 loader:
   image: "data_loader:6"
   ports:
-    - 8080:8080
+    - 9090:9090
   links:
     - es:es
   environment:

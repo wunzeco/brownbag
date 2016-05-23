@@ -70,10 +70,10 @@ jenkins_plugins:
 
 jenkins_extra_ssh_keys:
   # priority-moments - required for O2IP/Priority-Moments repo
-  - keyname: priority-moments
+  - keyname: brownbag
     public: |
       ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVT4Hth7soHd5teNxW4Y+vNUr4Tvfz19jt70DLstDjf965aqciIzi8EC+3qiiX2FClbfq/RA0RL5wbK1l27OxOr6tHExslapDe/TU58kQacyvU7m0E3JI+0oor0E+imt5LSh2WikP+yPbInnttSfX0f6zwN7ROh3V9bVoLyzz4WWENszRHceoJ9YfyF6+nZqEz1adG64Tc94Ys00g+hWm52A04IdOvs5QOYw7rnou91W73odzTmcoowHzP5HrBrQwK2hFKrrXCcg0TA/7eD5F8V7jQlhKKbCEawUrBlnTVEKcIjZjmNDky5yuFLHJ+npl2Itn/H2kpunzJ9K0xizJv
-    private: |
+    private_pem: |
       -----BEGIN RSA PRIVATE KEY-----
       MIIEowIBAAKCAQEA1U+B7Ye7KB3ebXjcVuGPrzVK+E7389fY7e9Ay7LQ43/euWqn
       IiM4vBAvt6ool9hQpW36v0QNES+cGytZduzsTq+rRxMbJWqQ3v01OfJEGnMr1O5t
