@@ -28,7 +28,8 @@ job("${svc}-service-build") {
     steps {
         shell ( "echo 'COMPILATION of code happens here'" )
         shell(
-            """
+            """#!/bin/bash
+            source ~/development/bin/activate
             cd \$WORKSPACE/app
             pip install -r requirements.txt
             echo -e "\\n\\n****** STATIC CODE ANALYSIS" && pylint *.py
