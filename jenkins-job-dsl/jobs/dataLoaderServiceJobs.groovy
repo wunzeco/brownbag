@@ -14,7 +14,7 @@ print "Build number is => ${BUILD_NUMBER}"
 def svc = 'data_loader'
 def rakeScriptsRepo = 'infra-rake-tf-build'
 def productDslRepo = 'infra-priority-stack'
-job("${svc}-service") {
+job("${svc}-service-build") {
     scm {
         git {
             remote {
@@ -54,7 +54,7 @@ job("${svc}-service") {
             onlyIfSuccessful()
         }
         downstreamParameterized {
-            trigger("${svc}-deploy") {
+            trigger("${svc}-service-deploy") {
                 condition('SUCCESS')
                 parameters {
                     currentBuild()
@@ -69,7 +69,7 @@ job("${svc}-service") {
 /*
     svc deploy job
 */
-job("${svc}-deploy") {
+job("${svc}-service-deploy") {
     parameters {
         choiceParam('DC_ENVIRONMENT', ['dev', 'test', 'stage', 'prod'],
                     'Product environment to build')
@@ -111,7 +111,7 @@ job("${svc}-deploy") {
 /*
     svc functional test job
 */
-job("${svc}-test-functional") {
+job("${svc}-service-test") {
     scm {
         git {
             remote {
@@ -122,30 +122,15 @@ job("${svc}-test-functional") {
         }
     }
     triggers {
-        upstream("${svc}-deploy")
+        upstream("${svc}-service-deploy")
     }
     steps {
-        shell("echo 'Run functional test'")
-    }
-}
-
-/*
-    svc performance test job
-*/
-job("${svc}-test-performance") {
-    scm {
-        git {
-            remote {
-                github("o2-priority/service-${svc}", "ssh")
-                credentials("priority-ci-user-git-creds-id")
-            }
-            branch('ci-pipeline')
-        }
-    }
-    triggers {
-        upstream("${svc}-test-functional")
-    }
-    steps {
-        shell("echo 'Run performance test'")
+        shell(
+            """
+            export DL_HOST=172.20.10.20
+            cd \$WORKSPACE/app
+            bundle install && cucumber
+            """.stripIndent()
+             )
     }
 }

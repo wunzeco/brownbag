@@ -10,8 +10,7 @@ job("_seed-microdc") {
     scm {
         git {
             remote {
-                github("o2-priority/infra-jenkins-job-dsl", 'ssh')
-                credentials("priority-ci-user-git-creds-id")
+                github("wunzeco/brownbag")
             }
         }
     }
@@ -19,13 +18,16 @@ job("_seed-microdc") {
         scm 'H/2 * * * *'
     }
     steps {
-        gradle 'clean test'
+        gradle {
+            tasks('clean')
+            tasks('test')
+            rootBuildScriptDir('jenkins-job-dsl')
+        }
         dsl {
-            external('jobs/**/*Jobs.groovy')
-            additionalClasspath('src/main/groovy')
+            external('jenkins-job-dsl/jobs/**/*Jobs.groovy')
         }
         dsl { 
-            external("**/*Pipeline.groovy")
+            external("jenkins-job-dsl/**/*Pipeline.groovy")
         }
     }
     publishers {
