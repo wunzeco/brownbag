@@ -31,8 +31,8 @@ job("${svc}-service-build") {
             """
             cd \$WORKSPACE/app
             pip install -r requirements.txt
-            echo -e "\n\n****** STATIC CODE ANALYSIS" && pylint *.py
-            echo -e "\n\n****** UNIT TEST" && nosetests -v
+            echo -e \"\n\n****** STATIC CODE ANALYSIS\" && pylint *.py
+            echo -e \"\n\n****** UNIT TEST\" && nosetests -v
             """.stripIndent()
              )
         shell(
