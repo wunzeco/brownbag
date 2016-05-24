@@ -20,6 +20,7 @@
       file: path="{{ app_artifact_tmp_dir }}" state=directory
 
     - name: Copy app artifact
+      copy:
         src:  "{{ app_artifact_store_path }}/{{ app_artifact }}"
         dest: "{{ app_artifact_tmp_dir }}"
 
