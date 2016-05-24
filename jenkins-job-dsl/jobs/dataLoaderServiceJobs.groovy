@@ -42,7 +42,8 @@ job("${svc}-service-build") {
             cd \$WORKSPACE
             echo -e '****** PACKAGING'
             tar -zcvf data_loader-\$BUILD_NUMBER.tar.gz app
-            cp data_loader-\$BUILD_NUMBER.tar.gz data_loader-latest.tar.gz
+            cp data_loader-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/
+            cp data_loader-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/data_loader-latest.tar.gz
             """.stripIndent()
              )
     }
