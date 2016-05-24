@@ -8,5 +8,5 @@ ENV     ES_CONN eshost
 RUN     pip install -r requirements.txt
 
 ENTRYPOINT ["python", "data_loader.py"]
-EXPOSE     8080
+EXPOSE     9090
 
