@@ -31,7 +31,7 @@
         copy: no
         
     - name: Run app environment
-      shell: docker-compose up -d
+      shell: docker-compose up -d chdir="{{ app_work_dir }}/app"
       register: compose
 
     - debug: var=compose.stdout_lines
