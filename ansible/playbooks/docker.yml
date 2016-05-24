@@ -4,10 +4,15 @@
   become: yes
 
   vars:
+    ssh_public_key: |
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVT4Hth7soHd5teNxW4Y+vNUr4Tvfz19jt70DLstDjf965aqciIzi8EC+3qiiX2FClbfq/RA0RL5wbK1l27OxOr6tHExslapDe/TU58kQacyvU7m0E3JI+0oor0E+imt5LSh2WikP+yPbInnttSfX0f6zwN7ROh3V9bVoLyzz4WWENszRHceoJ9YfyF6+nZqEz1adG64Tc94Ys00g+hWm52A04IdOvs5QOYw7rnou91W73odzTmcoowHzP5HrBrQwK2hFKrrXCcg0TA/7eD5F8V7jQlhKKbCEawUrBlnTVEKcIjZjmNDky5yuFLHJ+npl2Itn/H2kpunzJ9K0xizJv
 
   pre_tasks:
     - name: update apt repo
-      apt: update_cache=yes
+      apt: update_cache=yes cache_valid_time=1800
+
+    - name: Add SSH authorized keys for vagrant user
+      authorized_key: user=vagrant key={{ ssh_public_key }}
 
   roles:
     - role: wunzeco.docker
