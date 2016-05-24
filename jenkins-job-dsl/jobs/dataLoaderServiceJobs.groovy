@@ -42,9 +42,9 @@ job("${svc}-service-build") {
             cd \$WORKSPACE
             rm -f *.tar.gz
             echo -e '****** PACKAGING'
-            tar -zcvf data_loader-\$BUILD_NUMBER.tar.gz app
-            cp data_loader-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/
-            cp data_loader-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/data_loader-service-latest.tar.gz
+            tar -zcvf ${svc}-service-\$BUILD_NUMBER.tar.gz app
+            cp ${svc}-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/
+            cp ${svc}-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/${svc}-service-latest.tar.gz
             """.stripIndent()
              )
     }
