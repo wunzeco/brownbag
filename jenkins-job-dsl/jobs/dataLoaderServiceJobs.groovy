@@ -40,6 +40,7 @@ job("${svc}-service-build") {
         shell(
             """
             cd \$WORKSPACE
+            rm -f *.tar.gz
             echo -e '****** PACKAGING'
             tar -zcvf data_loader-\$BUILD_NUMBER.tar.gz app
             cp data_loader-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/
