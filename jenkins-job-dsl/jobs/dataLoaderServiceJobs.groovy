@@ -89,7 +89,7 @@ job("${svc}-service-deploy") {
             EXTRA_VARS="app_name=\$APP_NAME"
             #ansible-galaxy install -r requirements.yml -f -p galaxy_roles/
             ansible-playbook -i inventory playbooks/deploy.yml -e "\$EXTRA_VARS"
-            """
+            """.stripIndent()
                 )
     }
     wrappers {
