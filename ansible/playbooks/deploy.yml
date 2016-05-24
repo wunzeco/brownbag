@@ -30,6 +30,17 @@
         dest: "{{ app_work_dir }}"
         copy: no
         
+    - name: Build docker image for app
+      docker_image:
+        name:  "{{ app_name }}"
+        tag:   "{{ app_version }}"
+        path:  "{{ app_work_dir }}/app"
+        state: present
+
+    - name: Tag docker image with 'latest'
+      command:
+        "docker tag {{ app_name }}:{{ app_version }} {{ app_name }}:latest"
+
     - name: Run app environment
       shell: docker-compose up -d chdir="{{ app_work_dir }}/app"
       register: compose
