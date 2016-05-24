@@ -12,8 +12,8 @@
     - name: Install python-pip
       apt: name=python-pip update_cache=yes state=present
 
-    - name: Install awscli
-      pip: name=awscli state=present
+    - name: Install markupsafe
+      pip: name=markupsafe state=present
 
     - name: Install virtualenv
       pip: name=virtualenv state=present
