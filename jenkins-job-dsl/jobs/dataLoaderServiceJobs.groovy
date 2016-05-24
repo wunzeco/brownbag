@@ -41,7 +41,8 @@ job("${svc}-service-build") {
             """
             cd \$WORKSPACE
             echo -e '****** PACKAGING'
-            tar -zcvf data_loader.tar.gz app
+            tar -zcvf data_loader-\$BUILD_NUMBER.tar.gz app
+            cp data_loader-\$BUILD_NUMBER.tar.gz data_loader-latest.tar.gz
             """.stripIndent()
              )
     }
@@ -50,7 +51,6 @@ job("${svc}-service-build") {
     }
     publishers {
         archiveArtifacts {
-            pattern("**/Dockerfile")
             pattern("**/*.tar.gz")
             onlyIfSuccessful()
         }
@@ -72,35 +72,24 @@ job("${svc}-service-build") {
 */
 job("${svc}-service-deploy") {
     parameters {
-        choiceParam('DC_ENVIRONMENT', ['dev', 'test', 'stage', 'prod'],
-                    'Product environment to build')
-        stringParam('APP_NAME',     defaultValue = 'soa-cache-service', 
+        stringParam('APP_NAME',     defaultValue = "${svc}", 
                     description = 'App Name')
     }         
-    multiscm {
+    scm {
         git {
             remote {
-                github("o2-priority/${productDslRepo}", 'ssh')
-                credentials("priority-ci-user-git-creds-id")
+                github("wunzeco/brownbag")
             }
-            branch('master')
-            relativeTargetDir("${productDslRepo}")
         }
     }
     steps {
         shell(
             """
-            EXTRA_VARS="app_name=\$APP_NAME \$DC_ENVIRONMENT"
-            ansible-galaxy install -r requirements.yml -f -p galaxy_roles/
-            ansible-playbook -i environments/\$DC_ENVIRONMENT/inventory playbooks/dockerize.yml -e "\$EXTRA_VARS"
+            cd \$WORKSPACE/ansible
+            EXTRA_VARS="app_name=\$APP_NAME"
+            #ansible-galaxy install -r requirements.yml -f -p galaxy_roles/
+            ansible-playbook -i inventory playbooks/deploy.yml -e "\$EXTRA_VARS"
             """
-                )
-        shell(
-                "EXTRA_VARS=\"kong_api_obj_name=${svc} kong_api_obj_request_path='/${svc}-service'\"\n" +
-                "EXTRA_VARS=\"\$EXTRA_VARS kong_api_obj_upstream_url='http://sweb.\$DC_ENVIRONMENT.priority-infra.co.uk/${svc}-service/soacache'\"\n" +
-                "EXTRA_VARS=\"\$EXTRA_VARS kong_api_obj_preserve_host=false kong_api_obj_strip_request_path=true\"\n" +
-                "cd $productDslRepo/ansible\n" + 
-                "ansible-playbook -i environments/\$DC_ENVIRONMENT/inventory playbooks/kong_api_obj.yml -e \"\$EXTRA_VARS\""
                 )
     }
     wrappers {
@@ -115,10 +104,8 @@ job("${svc}-service-test") {
     scm {
         git {
             remote {
-                github("o2-priority/service-${svc}", "ssh")
-                credentials("priority-ci-user-git-creds-id")
+                github("wunzeco/brownbag")
             }
-            branch('ci-pipeline')
         }
     }
     triggers {
