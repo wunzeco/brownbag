@@ -39,9 +39,9 @@ job("${svc}-service-build") {
              )
         shell(
             """
-            cd \$WORKSPACE/app
+            cd \$WORKSPACE
             echo -e '****** PACKAGING'
-            tar -zcvf data_loader.tar.gz *
+            tar -zcvf data_loader.tar.gz app
             """.stripIndent()
              )
     }
@@ -89,12 +89,11 @@ job("${svc}-service-deploy") {
     }
     steps {
         shell(
-                "EXTRA_VARS=\"dockerize_app_name=\$APP_NAME dockerize_app_version=\$APP_VERSION\"\n" + 
-                "EXTRA_VARS=\"\$EXTRA_VARS dockerize_app_conf_file=/opt/app/conf/\$DC_ENVIRONMENT.yml\"\n" +
-                "EXTRA_VARS=\"\$EXTRA_VARS nginx_docker_container_port=5000\"\n" +
-                "cd $productDslRepo/ansible\n" + 
-                "ansible-galaxy install -r requirements.yml -f -p galaxy_roles/\n" +
-                "ansible-playbook -i environments/\$DC_ENVIRONMENT/inventory playbooks/dockerize.yml -e \"\$EXTRA_VARS\""
+            """
+            EXTRA_VARS="app_name=\$APP_NAME \$DC_ENVIRONMENT"
+            ansible-galaxy install -r requirements.yml -f -p galaxy_roles/
+            ansible-playbook -i environments/\$DC_ENVIRONMENT/inventory playbooks/dockerize.yml -e "\$EXTRA_VARS"
+            """
                 )
         shell(
                 "EXTRA_VARS=\"kong_api_obj_name=${svc} kong_api_obj_request_path='/${svc}-service'\"\n" +
