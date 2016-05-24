@@ -2,6 +2,9 @@
 - hosts: jenkins
   become: yes
 
+  vars:
+    app_artifact_store_path: /var/lib/jenkins/artifact-store
+
   vars_files:
     - jenkins_vars.yml
 
@@ -30,7 +33,9 @@
     - wunzeco.ssh-config
 
   post_tasks:
-    - name: Creat python virtual environment
+    - name: Create python virtual environment
       shell: virtualenv "{{ jenkins_home }}/development"
       become_user: jenkins
 
+    - name: Create local app artifact store
+      file: path={{ app_artifact_store_path }} owner=jenkins group=jenkins mode=0755 state=directory

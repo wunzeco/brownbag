@@ -1,0 +1,37 @@
+---
+- name: Deploy play
+  hosts: docker
+  become: yes
+
+  vars:
+    app_name: data_loader
+    app_version: latest
+    app_artifact: "{{ app_name }}-{{ app_version }}.tar.gz"
+    app_artifact_tmp_dir: /var/tmp/brownbag
+    app_artifact_store_path: /var/lib/jenkins/artifact-store
+    app_work_dir: /opt/brownbag
+    app_artifact_tmp_dir: /opt/brownbag
+
+  tasks:
+    - name: Create app work dir
+      file: path="{{ app_work_dir }}" state=directory
+
+    - name: Create app work dir
+      file: path="{{ app_artifact_tmp_dir }}" state=directory
+
+    - name: Copy app artifact
+        src:  "{{ app_artifact_store_path }}/{{ app_artifact }}"
+        dest: "{{ app_artifact_tmp_dir }}"
+
+    - name: Install app
+      unarchive: 
+        src:  "{{ app_artifact_tmp_dir }}/{{ app_artifact }}"
+        dest: "{{ app_work_dir }}"
+        copy: no
+        
+    - name: Run app environment
+      shell: docker-compose up -d
+      register: compose
+
+    - debug: var=compose.stdout_lines
+
