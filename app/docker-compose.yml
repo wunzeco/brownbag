@@ -4,7 +4,7 @@ es:
     - 9200:9200
   
 loader:
-  image: "data_loader:6"
+  image: "data_loader:latest"
   ports:
     - 9090:9090
   links:
