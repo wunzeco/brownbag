@@ -33,15 +33,20 @@ job("${svc}-service-build") {
             source ~/development/bin/activate
             cd \$WORKSPACE/app
             pip install -r requirements.txt
-            echo -e "\\n\\n****** STATIC CODE ANALYSIS" && pylint *.py
-            echo -e "\\n\\n****** UNIT TEST" && nosetests -v
+            echo -e "\\n\\n***************************"
+            echo -e "****** STATIC CODE ANALYSIS"
+            pylint *.py
+            echo -e "\\n\\n***************************"
+            echo -e "****** UNIT TEST"
+            nosetests -v
             """.stripIndent()
              )
         shell(
             """
             cd \$WORKSPACE
             rm -f *.tar.gz
-            echo -e '****** PACKAGING'
+            echo -e "\\n\\n************************************"
+            echo -e "****** PACKAGING PACKAGING PACKAGING"
             tar -zcvf ${svc}-service-\$BUILD_NUMBER.tar.gz app
             cp ${svc}-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/
             cp ${svc}-service-\$BUILD_NUMBER.tar.gz \$HOME/artifact-store/${svc}-service-latest.tar.gz
